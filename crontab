@@ -1,0 +1,26 @@
+MAILTO="TODO@gmail.com"
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+AWS_CONFIG_FILE=“/home/TfL_feeds/config”
+AWS_ACCESS_KEY_ID="TODO"
+AWS_SECRET_ACCESS_KEY="TODO"
+
+# Scripts to run
+
+# Every hour
+0 * * * * root /usr/bin/python /home/TfL_feeds/api_60.py 2>&1 | mail -s "api_60 outputs" TODO@gmail.com
+5 * * * * root /usr/bin/python /home/TfL_feeds/api_300.py 2>&1 | mail -s "api_300 outputs" TODO@gmail.com
+10 * * * * root /usr/bin/python /home/TfL_feeds/api_3600.py 2>&1 | mail -s "api_3600 outputs" TODO@gmail.com
+
+# 1am every day - tidy files
+0 1 * * * root /usr/bin/python /home/TfL_feeds/daily_tidy_up.py | mail -s "daily_push_s3 outputs" TODO@gmail.com
+
+# 4am every day - send files to S3
+0 3 * * * root /usr/bin/python /home/TfL_feeds/daily_push_s3.py | mail -s "daily_push_s3 outputs" TODO@gmail.com
+
+# Saturday at 3pm, every week
+0 15 * * 6 root /usr/bin/python /home/TfL_feeds/api_weekly.py | mail -s "api_weekly.py outputs" TODO@gmail.com
+
+# Don't remove the empty line at the end of this file. It is required to run the cron job
