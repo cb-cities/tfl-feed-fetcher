@@ -41,12 +41,19 @@ Most API's are called at 10m and run for 24hrs, managed internally in Python. Th
 
 The `tfl_gtfs` is called by cron every hour:
 
-"```0 10 * * * python /home/TfL_feeds/api_60.py 2>&1 | mail -s "api_60.py ouput" TODO@gmail.com
+```
+0 10 * * * python /home/TfL_feeds/api_60.py 2>&1 | mail -s "api_60.py ouput" TODO@gmail.com
+
 0 10 * * * python /home/TfL_feeds/api_300.py 2>&1 | mail -s "api_300.py ouput" TODO@gmail.com
+
 0 10 * * * python /home/TfL_feeds/api_3600.py 2>&1 | mail -s "api_3600.py ouput" TODO@gmail.com
+
 0 11 * * * python /home/TfL_feeds/daily_push_s3.py 2>&1 | mail -s "daily_push_s3.py ouput" TODO@gmail.com
+
 0 15 * * 6 python /home/TfL_feeds/api_weekly.py 2>&1 | mail -s "api_weekly.py.py ouput" TODO@gmail.com
-0 * * * * python /home/TfL_feeds/tfl_gtfs.py 2>&1 | mail -s "tfl_gtfs.py.py ouput" TODO@gmail.com```"
+
+0 * * * * python /home/TfL_feeds/tfl_gtfs.py 2>&1 | mail -s "tfl_gtfs.py.py ouput" TODO@gmail.com
+```
 
 
 Usage - Docker
